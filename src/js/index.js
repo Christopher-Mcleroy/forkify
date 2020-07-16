@@ -1,3 +1,3 @@
-import * as Search from "./Model/Search";
+import * as Search from './Model/Search';
 
-Search.getData("pizza");
+Search.getData('pizza');

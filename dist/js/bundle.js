@@ -1280,7 +1280,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Model_Search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Model/Search */ \"./src/js/Model/Search.js\");\n\n_Model_Search__WEBPACK_IMPORTED_MODULE_0__[\"getData\"](\"pizza\");\n\n//# sourceURL=webpack:///./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Model_Search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Model/Search */ \"./src/js/Model/Search.js\");\n\n_Model_Search__WEBPACK_IMPORTED_MODULE_0__[\"getData\"]('pizza');\n\n//# sourceURL=webpack:///./src/js/index.js?");
 
 /***/ })
 

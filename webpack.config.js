@@ -1,23 +1,25 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const path = require("path");
+/* eslint-disable prettier/prettier */
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
-  entry: "./src/js/index.js",
+  entry: './src/js/index.js',
   output: {
-    filename: "js/bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: 'js/bundle.js',
+    // eslint-disable-next-line no-undef
+    path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
-    contentBase: "./dist",
+    contentBase: './dist',
   },
   module: {
-    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" }],
+    rules: [{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }],
   },
   plugins: [
     new HtmlWebpackPlugin({
       // Also generate a test.html
-      filename: "index.html",
-      template: "src/index.html",
+      filename: 'index.html',
+      template: 'src/index.html',
     }),
   ],
 };
