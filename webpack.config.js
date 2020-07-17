@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+// eslint-disable-next-line node/no-unpublished-require
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
