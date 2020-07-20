@@ -1,33 +1,6 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import { elements } from './base';
 
-const ingredientFormated = (ele) => {
-  const count = 1000;
-  const unit = 'grams';
-  const item = 'sugar';
-  return `
-    <li class="recipe__item">
-    <svg class="recipe__icon">
-    <use href="img/icons.svg#icon-check"></use>
-    </svg>
-    <div class="recipe__count">${count}</div>
-    <div class="recipe__ingredient">
-    <span class="recipe__unit">${unit}</span>
-    ${item}
-    </div>
-    </li>
-    `;
-};
-
-function ingredient(ele) {
-  console.log(ele);
-  let html = '';
-  ele.forEach(() => {
-    html += ingredientFormated(ele);
-  });
-  return html;
-}
-
 // selectedRecipe: recipe: image_url: 'http://forkify-api.herokuapp.com/images/fruitpizza9a19.jpg';
 // ingredients: (17)[
 //   ('1-1/3 cup Shortening (may Substitute Butter)',
@@ -55,7 +28,32 @@ function ingredient(ele) {
 // source_url: 'http://thepioneerwoman.com/cooking/2012/01/fruit-pizza/';
 // title: 'Deep Dish Fruit Pizza';
 
-// eslint-disable-next-line import/prefer-default-export
+const ingredientFormated = (ele) => {
+  const count = 1000;
+  const unit = 'grams';
+  const item = 'sugar';
+  return `
+    <li class="recipe__item">
+    <svg class="recipe__icon">
+    <use href="img/icons.svg#icon-check"></use>
+    </svg>
+    <div class="recipe__count">${count}</div>
+    <div class="recipe__ingredient">
+    <span class="recipe__unit">${unit}</span>
+    ${item}
+    </div>
+    </li>
+    `;
+};
+
+const ingredient = (ele) => {
+  let html = '';
+  ele.forEach(() => {
+    html += ingredientFormated(ele);
+  });
+  return html;
+};
+
 export const renderRecipe = (recipe) => {
   elements.recipe.innerHTML = '';
   const r = recipe.recipe;

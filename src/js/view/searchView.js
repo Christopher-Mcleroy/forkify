@@ -6,6 +6,10 @@ export const getInput = () => elements.searchInput.value;
 export const clearInput = () => {
   elements.searchInput.value = '';
 };
+export const clearSearch = () => {
+  elements.searchResults.innerHTML = '';
+  elements.resultPages.innerHTML = '';
+};
 
 function limitTitleLength(title, limit = 17) {
   const newTitle = [];
@@ -77,17 +81,11 @@ export const renderRecipes = (recipes, page = 1, results = 10) => {
   // calc total pages
   const numPages = Math.ceil(recipes.length / results);
   // clear search results
-  elements.searchResults.innerHTML = '';
-  // create temp array
-  const temp = [...recipes];
-  // splice index of array and displays each recipe
-  temp.slice(start, end).forEach(displayRecipe);
-  // clear page buttons
-  elements.resultPages.innerHTML = '';
+  clearSearch();
+  // slice index of array and displays each recipe
+  recipes.slice(start, end).forEach(displayRecipe);
   // create buttons
   const btnHtml = displayBtn(page, numPages);
   // insert buttons into page
   elements.resultPages.insertAdjacentHTML('beforeend', btnHtml);
-  console.log(start);
-  console.log(end);
 };
