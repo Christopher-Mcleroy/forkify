@@ -9,7 +9,11 @@ const state = {};
 
 async function controlSearch(page) {
   // 1 get input from view
-  const query = searchView.getInput();
+  // const query = searchView.getInput();
+  // ************************************************************************************************** */
+  // ******************************************testing    ********************************************* */
+  // ************************************************************************************************** */
+  const query = 'pizza';
   if (query) {
     // 2 create new search
     state.search = new Search(query);
@@ -26,9 +30,7 @@ async function controlSearch(page) {
         removeLoader();
         // 7. display results
         searchView.renderRecipes(state.search.recipes, page);
-        // 8. add event
         // eslint-disable-next-line no-use-before-define
-        resultsListener();
       })
       .catch((err) => {
         console.log(err);
@@ -38,20 +40,36 @@ async function controlSearch(page) {
 
 async function controlItem(ele) {
   // 1. get selected id
-  const id = ele.getAttribute('href').split('#')[1];
-  // 2. save in state
-  state.recipe = new Recipe(id);
-  // 3. render loader
-  renderLoader(elements.recipe);
-  // 4. get item data
-  await state.recipe.getItemData();
-  // 5. remove loader
-  removeLoader();
-  // 6. render new item
-  recipe.renderRecipe(state.recipe.selectedRecipe);
+  const id = window.location.hash.replace('#', '');
+  if (id) {
+    // 2. save in state
+    state.recipe = new Recipe(id);
+    // 3. render loader
+    renderLoader(elements.recipe);
+    // 4. get item data
+    await state.recipe.getItemData();
+    // parse ingredients
+    state.recipe.parseIngredients();
+    // 5. remove loader
+    removeLoader();
+    // calc time
+    state.recipe.calcRecipeTime();
+    // calc servings
+    state.recipe.calcServings();
+    // 6. render new item
+    recipe.renderRecipe(state.recipe);
+  }
 }
 
 elements.searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  controlSearch();
+});
+
+// ************************************************************************************************** */
+// ******************************************testing    ********************************************* */
+// ************************************************************************************************** */
+window.addEventListener('load', (e) => {
   e.preventDefault();
   controlSearch();
 });
@@ -63,12 +81,8 @@ elements.resultPages.addEventListener('click', (e) => {
   const page = parseInt(btn.getAttribute('data-page'), 10);
   // renders new recipes
   searchView.renderRecipes(state.search.recipes, page);
-  resultsListener();
 });
 
-function resultsListener() {
-  // eslint-disable-next-line no-undef
-  document.querySelectorAll('.results__link').forEach((ele) => {
-    ele.addEventListener('click', () => controlItem(ele));
-  });
-}
+['hashchange', 'load'].forEach((event) =>
+  window.addEventListener(event, controlItem)
+);

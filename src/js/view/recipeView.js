@@ -1,62 +1,25 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import { elements } from './base';
 
-// selectedRecipe: recipe: image_url: 'http://forkify-api.herokuapp.com/images/fruitpizza9a19.jpg';
-// ingredients: (17)[
-//   ('1-1/3 cup Shortening (may Substitute Butter)',
-//   '1-1/2 cup Sugar',
-//   '1 teaspoon Orange Zest',
-//   '1 teaspoon Vanilla',
-//   '2 whole Eggs',
-//   '8 teaspoons Whole Milk',
-//   '4 cups All-purpose Flour',
-//   '3 teaspoons Baking Powder',
-//   '1/2 teaspoon Salt',
-//   '2 jars (13 Ounces Each) Marshmallow Creme',
-//   '2 packages (8 Ounces Each) Cream Cheese',
-//   'Peaches',
-//   'Kiwi Fruit',
-//   'Blueberries',
-//   'Pears',
-//   'Raspberries',
-//   'Other Fruit Optional')
-// ];
-// publisher: 'The Pioneer Woman';
-// publisher_url: 'http://thepioneerwoman.com';
-// recipe_id: '46956';
-// social_rank: 100;
-// source_url: 'http://thepioneerwoman.com/cooking/2012/01/fruit-pizza/';
-// title: 'Deep Dish Fruit Pizza';
-
 const ingredientFormated = (ele) => {
-  const count = 1000;
-  const unit = 'grams';
-  const item = 'sugar';
   return `
     <li class="recipe__item">
     <svg class="recipe__icon">
     <use href="img/icons.svg#icon-check"></use>
     </svg>
-    <div class="recipe__count">${count}</div>
+    <div class="recipe__count">${ele.value}</div>
     <div class="recipe__ingredient">
-    <span class="recipe__unit">${unit}</span>
-    ${item}
+    <span class="recipe__unit">${ele.unit}</span>
+    ${ele.ingredient}
     </div>
     </li>
     `;
 };
 
-const ingredient = (ele) => {
-  let html = '';
-  ele.forEach(() => {
-    html += ingredientFormated(ele);
-  });
-  return html;
-};
-
+// eslint-disable-next-line import/prefer-default-export
 export const renderRecipe = (recipe) => {
   elements.recipe.innerHTML = '';
-  const r = recipe.recipe;
+  const r = recipe.selectedRecipe.recipe;
   const html = `
 <figure class="recipe__fig">
     <img src="${r.image_url}" alt="Tomato" class="recipe__img">
@@ -69,14 +32,18 @@ export const renderRecipe = (recipe) => {
         <svg class="recipe__info-icon">
             <use href="img/icons.svg#icon-stopwatch"></use>
         </svg>
-        <span class="recipe__info-data recipe__info-data--minutes">45</span>
+        <span class="recipe__info-data recipe__info-data--minutes">${
+          recipe.prepTime
+        }</span>
         <span class="recipe__info-text"> minutes</span>
     </div>
     <div class="recipe__info">
         <svg class="recipe__info-icon">
             <use href="img/icons.svg#icon-man"></use>
         </svg>
-        <span class="recipe__info-data recipe__info-data--people">4</span>
+        <span class="recipe__info-data recipe__info-data--people">${
+          recipe.servings
+        }</span>
         <span class="recipe__info-text"> servings</span>
 
         <div class="recipe__info-buttons">
@@ -102,7 +69,7 @@ export const renderRecipe = (recipe) => {
 
 <div class="recipe__ingredients">
     <ul class="recipe__ingredient-list">
-        ${ingredient(r.ingredients)}
+        ${r.ingredients.map((el) => ingredientFormated(el)).join('')}
     </ul>
 
     <button class="btn-small recipe__btn">
