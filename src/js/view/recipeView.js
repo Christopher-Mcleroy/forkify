@@ -1,4 +1,5 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
+import { Fraction } from 'fractional';
 import { elements } from './base';
 
 const ingredientFormated = (ele) => {
@@ -7,7 +8,7 @@ const ingredientFormated = (ele) => {
     <svg class="recipe__icon">
     <use href="img/icons.svg#icon-check"></use>
     </svg>
-    <div class="recipe__count">${ele.value}</div>
+    <div class="recipe__count">${new Fraction(ele.value).toString()}</div>
     <div class="recipe__ingredient">
     <span class="recipe__unit">${ele.unit}</span>
     ${ele.ingredient}
@@ -15,16 +16,21 @@ const ingredientFormated = (ele) => {
     </li>
     `;
 };
+export const updateIngredients = (r) => {
+  document.querySelectorAll('.recipe__count').forEach((el, i) => {
+    el.innerText = new Fraction(r.ingredients[i].value).toString();
+  });
+  document.querySelector('.recipe__info-data--people').innerText = r.servings;
+};
 
 // eslint-disable-next-line import/prefer-default-export
 export const renderRecipe = (recipe) => {
   elements.recipe.innerHTML = '';
-  const r = recipe.selectedRecipe.recipe;
   const html = `
 <figure class="recipe__fig">
-    <img src="${r.image_url}" alt="Tomato" class="recipe__img">
+    <img src="${recipe.image_url}" alt="Tomato" class="recipe__img">
     <h1 class="recipe__title">
-        <span>${r.title}</span>
+        <span>${recipe.title}</span>
     </h1>
 </figure>
 <div class="recipe__details">
@@ -47,12 +53,12 @@ export const renderRecipe = (recipe) => {
         <span class="recipe__info-text"> servings</span>
 
         <div class="recipe__info-buttons">
-            <button class="btn-tiny">
+            <button class="btn-tiny btn-decrease">
                 <svg>
                     <use href="img/icons.svg#icon-circle-with-minus"></use>
                 </svg>
             </button>
-            <button class="btn-tiny">
+            <button class="btn-tiny btn-increase">
                 <svg>
                     <use href="img/icons.svg#icon-circle-with-plus"></use>
                 </svg>
@@ -69,7 +75,7 @@ export const renderRecipe = (recipe) => {
 
 <div class="recipe__ingredients">
     <ul class="recipe__ingredient-list">
-        ${r.ingredients.map((el) => ingredientFormated(el)).join('')}
+        ${recipe.ingredients.map((el) => ingredientFormated(el)).join('')}
     </ul>
 
     <button class="btn-small recipe__btn">
@@ -85,10 +91,12 @@ export const renderRecipe = (recipe) => {
     <p class="recipe__directions-text">
         This recipe was carefully designed and tested by
         <span class="recipe__by">${
-          r.publisher
+          recipe.publisher
         }</span>. Please check out directions at their website.
     </p>
-    <a class="btn-small recipe__btn" href="${r.source_url}" target="_blank">
+    <a class="btn-small recipe__btn" href="${
+      recipe.source_url
+    }" target="_blank">
         <span>Directions</span>
         <svg class="search__icon">
             <use href="img/icons.svg#icon-triangle-right"></use>

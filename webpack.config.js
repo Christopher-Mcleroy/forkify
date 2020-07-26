@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: './src/js/index.js',
+  entry: ['babel-polyfill', './src/js/index.js'],
   output: {
     filename: 'js/bundle.js',
     // eslint-disable-next-line no-undef

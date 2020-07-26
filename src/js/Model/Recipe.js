@@ -10,20 +10,36 @@ export default class Recipe {
     const result = await axios(
       `https://forkify-api.herokuapp.com/api/get?rId=${this.id}`
     );
-    this.selectedRecipe = result.data;
+    this.recipe = result.data.recipe;
+    this.image_url = result.data.recipe.image_url;
+    this.ingredients = result.data.recipe.ingredients;
+    this.publisher = result.data.recipe.publisher;
+    this.publisher_url = result.data.recipe.publisher_url;
+    this.source_url = result.data.recipe.source_url;
+    this.title = result.data.recipe.title;
   }
 
   calcRecipeTime() {
-    const periods = this.selectedRecipe.recipe.ingredients.length / 3;
-    this.prepTime = Math.ceil(parseInt(periods * 15));
+    const periods = this.ingredients.length / 3;
+    this.prepTime = Math.ceil(parseInt(periods * 15, 10));
   }
 
   calcServings() {
     this.servings = 4;
   }
 
+  updateServings(type) {
+    const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
+    this.ingredients.forEach((ing) => {
+      ing.value *= newServings / this.servings;
+    });
+
+    this.servings = newServings;
+  }
+
   parseIngredients() {
-    let ingredient = this.selectedRecipe.recipe.ingredients;
+    const { ingredients } = this;
     const longIngredient = [
       'cups',
       'cup',
@@ -47,7 +63,7 @@ export default class Recipe {
     // loop array
 
     // loop long ingredients
-    const newIngredient = ingredient.map((element) => {
+    const newIngredient = ingredients.map((element) => {
       // lowercase ingredients
       let ingredient = element.toLowerCase();
       // loop long ingredients
@@ -59,10 +75,13 @@ export default class Recipe {
       ingredient = ingredient.replace(/ *\([^)]*\) */g, ' ');
       // split into count unit and ingredient
       const ingredientArr = ingredient.trim().split(' ');
+      // finds unit index
       const unitIndex = ingredientArr.findIndex((el) =>
         shortIngredient.includes(el)
       );
+      // creates ingredient object
       let ingObj = {};
+      // assigns values unit and ingredient to ingObj
       if (unitIndex === 0) {
         ingObj = {
           value: 1,
@@ -73,7 +92,7 @@ export default class Recipe {
         ingObj = {
           value: eval(
             ingredientArr.slice(0, unitIndex).join('+').replace('-', '+')
-          ).toFixed(2),
+          ),
           unit: ingredientArr[unitIndex],
           ingredient: ingredientArr.slice(unitIndex).join(' '),
         };
@@ -93,6 +112,7 @@ export default class Recipe {
       // return result
       return ingObj;
     });
-    this.selectedRecipe.recipe.ingredients = newIngredient;
+    // sets new ingredients
+    this.ingredients = newIngredient;
   }
 }

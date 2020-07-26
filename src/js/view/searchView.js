@@ -10,6 +10,19 @@ export const clearSearch = () => {
   elements.searchResults.innerHTML = '';
   elements.resultPages.innerHTML = '';
 };
+export const clearSelected = () => {
+  const selected = document.querySelector('.results__link--active');
+  if (selected) {
+    selected.classList.remove('results__link--active');
+  }
+};
+
+export const highlightSelected = (id) => {
+  const selected = document.querySelector(`[href="#${id}"]`);
+  if (selected) {
+    selected.classList.add('results__link--active');
+  }
+};
 
 function limitTitleLength(title, limit = 17) {
   const newTitle = [];
