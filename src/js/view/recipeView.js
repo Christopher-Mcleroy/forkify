@@ -8,7 +8,9 @@ const ingredientFormated = (ele) => {
     <svg class="recipe__icon">
     <use href="img/icons.svg#icon-check"></use>
     </svg>
-    <div class="recipe__count">${new Fraction(ele.value).toString()}</div>
+    <div class="recipe__count">${new Fraction(
+      ele.value.toFixed('1')
+    ).toString()}</div>
     <div class="recipe__ingredient">
     <span class="recipe__unit">${ele.unit}</span>
     ${ele.ingredient}
@@ -18,7 +20,7 @@ const ingredientFormated = (ele) => {
 };
 export const updateIngredients = (r) => {
   document.querySelectorAll('.recipe__count').forEach((el, i) => {
-    el.innerText = new Fraction(r.ingredients[i].value).toString();
+    el.innerText = new Fraction(r.ingredients[i].value.toFixed('1')).toString();
   });
   document.querySelector('.recipe__info-data--people').innerText = r.servings;
 };

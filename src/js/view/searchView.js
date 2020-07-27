@@ -24,7 +24,7 @@ export const highlightSelected = (id) => {
   }
 };
 
-function limitTitleLength(title, limit = 17) {
+export const limitTitleLength = (title, limit = 17) => {
   const newTitle = [];
   if (title.length > limit) {
     title.split(' ').reduce((acc, cur) => {
@@ -37,7 +37,7 @@ function limitTitleLength(title, limit = 17) {
     return `${newTitle.join(' ')} ...`;
   }
   return title;
-}
+};
 
 function displayRecipe(recipe) {
   const html = `

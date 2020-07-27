@@ -8,6 +8,7 @@ export const elements = {
   searchRes: document.querySelector('.results'),
   resultPages: document.querySelector('.results__pages'),
   shoppingList: document.querySelector('.shopping__list'),
+  like: document.querySelector('.likes__list'),
 };
 
 export const renderLoader = (parent) => {
