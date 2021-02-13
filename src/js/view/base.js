@@ -14,11 +14,7 @@ export const elements = {
 export const renderLoader = (parent) => {
   const html = `
   <div class="loader">
-  <svg>
-  <use
-  href="img/icons.svg#icon-cw">
-  </use>
-  </svg>
+  <i class="fas fa-spinner"></i>
   </div>
  `;
   parent.insertAdjacentHTML('afterbegin', html);
