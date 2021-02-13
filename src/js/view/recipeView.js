@@ -5,9 +5,7 @@ import { elements } from './base';
 const ingredientFormated = (ele) => {
   return `
     <li class="recipe__item">
-    <svg class="recipe__icon">
-    <use href="img/icons.svg#icon-check"></use>
-    </svg>
+    <i class="recipe__icon fas fa-check"></i>
     <div class="recipe__count">${new Fraction(
       ele.value.toFixed('1')
     ).toString()}</div>
@@ -37,18 +35,14 @@ export const renderRecipe = (recipe) => {
 </figure>
 <div class="recipe__details">
     <div class="recipe__info">
-        <svg class="recipe__info-icon">
-            <use href="img/icons.svg#icon-stopwatch"></use>
-        </svg>
+        <i class="recipe__info-icon fas fa-stopwatch"></i>
         <span class="recipe__info-data recipe__info-data--minutes">${
           recipe.prepTime
         }</span>
         <span class="recipe__info-text"> minutes</span>
     </div>
     <div class="recipe__info">
-        <svg class="recipe__info-icon">
-            <use href="img/icons.svg#icon-man"></use>
-        </svg>
+        <i class="recipe__info-icon fas fa-male"></i>
         <span class="recipe__info-data recipe__info-data--people">${
           recipe.servings
         }</span>
@@ -56,22 +50,16 @@ export const renderRecipe = (recipe) => {
 
         <div class="recipe__info-buttons">
             <button class="btn-tiny btn-decrease">
-                <svg>
-                    <use href="img/icons.svg#icon-circle-with-minus"></use>
-                </svg>
+                  <i class="fas fa-minus"></i>
             </button>
             <button class="btn-tiny btn-increase">
-                <svg>
-                    <use href="img/icons.svg#icon-circle-with-plus"></use>
-                </svg>
+                <i class="fas fa-plus"></i>
             </button>
         </div>
 
     </div>
     <button class="recipe__love">
-        <svg class="header__likes">
-            <use href="img/icons.svg#icon-heart-outlined"></use>
-        </svg>
+           <i class="header__likes far fa-heart"></i>
     </button>
 </div>
 
@@ -81,9 +69,7 @@ export const renderRecipe = (recipe) => {
     </ul>
 
     <button class="btn-small recipe__btn">
-        <svg class="search__icon">
-            <use href="img/icons.svg#icon-shopping-cart"></use>
-        </svg>
+           <i class="search__icon fas fa-cart-plus"></i>
         <span>Add to shopping list</span>
     </button>
 </div>
@@ -100,9 +86,7 @@ export const renderRecipe = (recipe) => {
       recipe.source_url
     }" target="_blank">
         <span>Directions</span>
-        <svg class="search__icon">
-            <use href="img/icons.svg#icon-triangle-right"></use>
-        </svg>
+        <i class="search__icon fas fa-caret-right"></i>
     </a>
 </div>`;
   elements.recipe.insertAdjacentHTML('beforeend', html);

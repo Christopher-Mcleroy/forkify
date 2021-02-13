@@ -6,12 +6,9 @@ export const removeLike = (id) => {
 };
 
 export const toggleLikeBtn = () => {
-  const likeBtn = document.querySelector('.header__likes use');
-  if (likeBtn.getAttribute('href') === 'img/icons.svg#icon-heart-outlined') {
-    likeBtn.setAttribute('href', 'img/icons.svg#icon-heart');
-  } else {
-    likeBtn.setAttribute('href', 'img/icons.svg#icon-heart-outlined');
-  }
+  const likeBtn = document.querySelector('.header__likes');
+  likeBtn.classList.toggle('fas');
+  likeBtn.classList.toggle('far');
 };
 
 export const addLike = (like) => {
