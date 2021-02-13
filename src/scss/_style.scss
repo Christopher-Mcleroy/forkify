@@ -1,18 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-}
-
-html {
-  box-sizing: border-box;
-  font-size: 62.5%;
-}
 @media only screen and (max-width: 68.75em) {
   html {
     font-size: 50%;
@@ -20,10 +5,6 @@ html {
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #655a56;
   background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
   background-size: cover;
   background-repeat: no-repeat;
@@ -50,115 +31,6 @@ body {
   }
 }
 
-.btn,
-.btn-small,
-.btn-small:link,
-.btn-small:visited {
-  background-image: linear-gradient(to right bottom, #fbdb89, #f48982);
-  border-radius: 10rem;
-  border: none;
-  text-transform: uppercase;
-  color: #fff;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s;
-}
-.btn:hover,
-.btn-small:hover {
-  transform: scale(1.05);
-}
-.btn:focus,
-.btn-small:focus {
-  outline: none;
-}
-.btn > *:first-child,
-.btn-small > *:first-child {
-  margin-right: 1rem;
-}
-
-.btn {
-  padding: 1.3rem 3rem;
-  font-size: 1.4rem;
-}
-.btn svg {
-  height: 2.25rem;
-  width: 2.25rem;
-  fill: currentColor;
-}
-
-.btn-small,
-.btn-small:link,
-.btn-small:visited {
-  font-size: 1.3rem;
-  padding: 1rem 1.75rem;
-  text-decoration: none;
-}
-.btn-small svg,
-.btn-small:link svg,
-.btn-small:visited svg {
-  height: 1.5rem;
-  width: 1.5rem;
-  fill: currentColor;
-}
-
-.btn-inline {
-  color: #f59a83;
-  font-size: 1.2rem;
-  border: none;
-  background-color: #f9f5f3;
-  padding: 0.8rem 1.2rem;
-  border-radius: 10rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s;
-}
-.btn-inline svg {
-  height: 1.5rem;
-  width: 1.5rem;
-  fill: currentColor;
-  margin: 0 0.2rem;
-}
-.btn-inline span {
-  margin: 0 0.4rem;
-}
-.btn-inline:hover {
-  color: #f48982;
-  background-color: #f2efee;
-}
-.btn-inline:focus {
-  outline: none;
-}
-
-.btn-tiny {
-  height: 1.75rem;
-  width: 1.75rem;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-.btn-tiny svg {
-  height: 100%;
-  width: 100%;
-  fill: #f59a83;
-  transition: all 0.3s;
-}
-.btn-tiny:focus {
-  outline: none;
-}
-.btn-tiny:hover svg {
-  fill: #f48982;
-  transform: translateY(-1px);
-}
-.btn-tiny:active svg {
-  fill: #f48982;
-  transform: translateY(0);
-}
-.btn-tiny:not(:last-child) {
-  margin-right: 0.3rem;
-}
-
 .heading-2 {
   font-size: 1.8rem;
   font-weight: 600;
@@ -179,8 +51,6 @@ body {
 .link:visited {
   color: #968b87;
 }
-
-
 
 .header {
   grid-area: head;
@@ -246,7 +116,6 @@ body {
 .likes__icon i {
   color: #f59a83;
   font-size: 3.75rem;
- 
 }
 .likes__panel {
   position: absolute;
@@ -457,10 +326,9 @@ body {
 .recipe__love:focus {
   outline: none;
 }
-.recipe__love svg {
-  height: 2.75rem;
-  width: 2.75rem;
-  fill: #fff;
+.recipe__love i {
+  font-size: 2.75rem;
+  color: #fff;
 }
 .recipe__ingredients {
   padding: 4rem 5rem;
