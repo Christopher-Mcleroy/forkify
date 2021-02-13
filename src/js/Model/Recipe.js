@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 import axios from 'axios';
 
 export default class Recipe {
@@ -31,8 +30,8 @@ export default class Recipe {
   updateServings(type) {
     const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
 
-    this.ingredients.forEach((ing) => {
-      ing.value *= newServings / this.servings;
+    this.ingredients.map((ing) => {
+      return (ing.value *= newServings / this.servings);
     });
 
     this.servings = newServings;
