@@ -24,26 +24,16 @@ module.exports = {
         ]
       },
       {
-        test: /\.(eot|woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(jpg|gif|png|mp4|eot|woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'fonts/',
+              outputPath: 'imgs',
             },
           },
         ],
-      },
-      {
-        test: /\.(jpg|gif|png|mp4)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'imgs',
-          },
-        },
       },
       { test: /\.html$/, use: ['html-loader'] },
     ],
