@@ -8,6 +8,7 @@ import * as searchView from './view/searchView';
 import * as recipe from './view/recipeView';
 import * as listView from './view/listView';
 import * as likesView from './view/likesView';
+import "../scss/main.scss";
 
 const state = {};
 
