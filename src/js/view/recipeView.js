@@ -1,29 +1,31 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 import { Fraction } from 'fractional';
 import { elements } from './base';
 
-const ingredientFormated = (ele) => {
+const ingredientFormated = (ingredient) => {
   return `
     <li class="recipe__item">
-    <i class="recipe__icon fas fa-check"></i>
-    <div class="recipe__count">${new Fraction(
-      ele.value.toFixed('1')
-    ).toString()}</div>
-    <div class="recipe__ingredient">
-    <span class="recipe__unit">${ele.unit}</span>
-    ${ele.ingredient}
-    </div>
+      <i class="recipe__icon fas fa-check"></i>
+      <div class="recipe__count">${new Fraction(
+        ingredient.value.toFixed('1')
+      ).toString()}</div>
+       <div class="recipe__ingredient">
+       <span class="recipe__unit">${ingredient.unit}</span>
+       ${ingredient.ingredient}
+      </div>
     </li>
     `;
 };
-export const updateIngredients = (r) => {
-  document.querySelectorAll('.recipe__count').forEach((el, i) => {
-    el.innerText = new Fraction(r.ingredients[i].value.toFixed('1')).toString();
+
+export const updateIngredients = (recipe) => {
+  document.querySelectorAll('.recipe__count').forEach((recipeCount, i) => {
+    recipeCount.innerText = new Fraction(
+      recipe.ingredients[i].value.toFixed('1')
+    ).toString();
   });
-  document.querySelector('.recipe__info-data--people').innerText = r.servings;
+  document.querySelector('.recipe__info-data--people').innerText =
+    recipe.servings;
 };
 
-// eslint-disable-next-line import/prefer-default-export
 export const renderRecipe = (recipe) => {
   elements.recipe.innerHTML = '';
   const html = `
@@ -65,7 +67,9 @@ export const renderRecipe = (recipe) => {
 
 <div class="recipe__ingredients">
     <ul class="recipe__ingredient-list">
-        ${recipe.ingredients.map((el) => ingredientFormated(el)).join('')}
+        ${recipe.ingredients
+          .map((ingredient) => ingredientFormated(ingredient))
+          .join('')}
     </ul>
 
     <button class="btn-small recipe__btn">

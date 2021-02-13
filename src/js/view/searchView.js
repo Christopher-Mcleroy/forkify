@@ -63,7 +63,7 @@ function createBtn(page, type) {
          <i class="search__icon fas fa-caret-${
            type === 'prev' ? 'left' : 'right'
          }"></i>
-    <span>Page${type === 'prev' ? page - 1 : page + 1}</span>
+    <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
 </button>
 `;
 }
