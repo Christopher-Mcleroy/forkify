@@ -1,4 +1,5 @@
 import { elements } from './base';
+import { limitStringLength } from './limitStringLength';
 
 export const getInput = () => elements.searchInput.value;
 
@@ -23,21 +24,6 @@ export const highlightSelected = (id) => {
   }
 };
 
-export const limitTitleLength = (title, limit = 17) => {
-  const newTitle = [];
-  if (title.length > limit) {
-    title.split(' ').reduce((acc, cur) => {
-      if (acc + cur.length <= limit) {
-        newTitle.push(cur);
-      }
-      const newAcc = acc + cur.length;
-      return newAcc;
-    }, 0);
-    return `${newTitle.join(' ')} ...`;
-  }
-  return title;
-};
-
 function displayRecipe(recipe) {
   const html = `
 <li>
@@ -46,7 +32,7 @@ function displayRecipe(recipe) {
             <img src="${recipe.image_url}" alt="Test">
         </figure>
         <div class="results__data">
-            <h4 class="results__name">${limitTitleLength(recipe.title)}</h4>
+            <h4 class="results__name">${limitStringLength(recipe.title)}</h4>
             <p class="results__author">${recipe.publisher}</p>
         </div>
     </a>

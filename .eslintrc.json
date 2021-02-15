@@ -5,6 +5,7 @@
     "prettier/prettier": "off",
     "no-unused-vars": "warn",
     "no-process-exit": "off",
+    "no-undef": "off",
     "object-shorthand": "off",
     "node/no-unsupported-features/es-syntax": "off"
   },

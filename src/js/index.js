@@ -1,7 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import Search from './model/Search';
 import Recipe from './model/Recipe';
-import ShoppingList from './model/shoppingList';
+import ShoppingList from './model/ShoppingList';
 import Likes from './model/Likes';
 import { elements, renderLoader, removeLoader } from './view/base';
 import * as searchView from './view/searchView';
@@ -45,7 +45,7 @@ async function controlSearch(page) {
         // eslint-disable-next-line no-use-before-define
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   }
 }
@@ -101,7 +101,7 @@ const controlCart = () => {
 // ******************************controller for like            ************************************* */
 // ************************************************************************************************** */
 
-const controlLike = () => {
+const controlLike = (state) => {
   if (!state.likes) state.likes = new Likes();
   const id = state.recipe.id;
   if (state.likes.isLiked(id) === -1) {
@@ -157,7 +157,7 @@ elements.recipe.addEventListener('click', (e) => {
   } else if (e.target.matches('.recipe__btn, .recipe__btn *')) {
     controlCart();
   } else if (e.target.matches('.recipe__love, .recipe__love *')) {
-    controlLike();
+    controlLike(state);
   }
 });
 

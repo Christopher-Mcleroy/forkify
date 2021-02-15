@@ -1,5 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
-/* eslint-disable prettier/prettier */
 import { elements } from './base';
 
 export const renderItem = (item) => {

@@ -1,5 +1,5 @@
 import { elements } from './base';
-import { limitTitleLength } from './searchView';
+import { limitStringLength } from './limitStringLength';
 
 export const removeLike = (id) => {
   document.querySelector(`[data-id="${id}"]`).remove();
@@ -19,7 +19,7 @@ export const addLike = (like) => {
             <img src="${like.img}" alt="Test">
         </figure>
         <div class="likes__data">
-            <h4 class="likes__name">${limitTitleLength(like.title)}</h4>
+            <h4 class="likes__name">${limitStringLength(like.title)}</h4>
             <p class="likes__author">${like.publisher}</p>
         </div>
     </a>
