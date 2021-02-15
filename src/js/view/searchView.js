@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 import { elements } from './base';
 
 export const getInput = () => elements.searchInput.value;

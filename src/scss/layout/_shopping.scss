@@ -1,12 +1,11 @@
 .shopping {
-  padding: 3rem 4rem;
+  padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
 }
 .shopping__list {
   list-style: none;
   max-height: 77rem;
-  overflow: scroll;
 }
 .shopping__item {
   display: flex;
@@ -31,7 +30,7 @@
   font-size: 1.2rem;
   text-align: center;
   border: none;
-  width: 3.7rem;
+  width: 3.9rem;
   border-radius: 3px;
 }
 .shopping__count input:focus {
@@ -49,8 +48,6 @@
 }
 .shopping__delete {
   margin-top: 0.5rem;
-  position: absolute;
-  right: 0;
   background-image: linear-gradient(
     to right,
     transparent 0%,
@@ -59,11 +56,6 @@
   );
   width: 3.75rem;
   padding-left: 2rem;
-  visibility: hidden;
-  opacity: 0;
+
   transition: all 0.5s;
-}
-.shopping__item:hover .shopping__delete {
-  opacity: 1;
-  visibility: visible;
 }

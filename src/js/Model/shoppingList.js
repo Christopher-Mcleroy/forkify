@@ -1,8 +1,6 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
-/* eslint-disable prettier/prettier */
 import uniqid from 'uniqid';
 
-export default class List {
+export default class ShoppingList {
   constructor() {
     this.items = [];
   }

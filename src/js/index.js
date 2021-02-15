@@ -1,14 +1,14 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
 import Search from './model/Search';
 import Recipe from './model/Recipe';
-import List from './model/List';
+import ShoppingList from './model/shoppingList';
 import Likes from './model/Likes';
 import { elements, renderLoader, removeLoader } from './view/base';
 import * as searchView from './view/searchView';
 import * as recipe from './view/recipeView';
-import * as listView from './view/listView';
+import * as shoppingCartView from './view/shoppingCart';
 import * as likesView from './view/likesView';
-import "../scss/main.scss";
+import '../scss/main.scss';
 
 const state = {};
 
@@ -90,11 +90,11 @@ async function controlItem() {
 // ************************************************************************************************** */
 
 const controlCart = () => {
-  if (!state.list) state.list = new List();
+  if (!state.list) state.list = new ShoppingList();
   state.recipe.ingredients.forEach((el) =>
     state.list.addItem(el.value, el.unit, el.ingredient)
   );
-  state.list.items.forEach((el) => listView.renderItem(el));
+  state.list.items.forEach((el) => shoppingCartView.renderItem(el));
 };
 
 // ************************************************************************************************** */
@@ -168,7 +168,7 @@ elements.shoppingList.addEventListener('click', (e) => {
     // get id
     const id = e.target.closest('.shopping__item').dataset.itemid;
     state.list.removeItem(id);
-    listView.removeItem(id);
+    shoppingCartView.removeItem(id);
   }
 });
 
