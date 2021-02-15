@@ -3,21 +3,16 @@ export default class Likes {
     this.likes = [];
   }
 
-  addLike(id, title, publisher, img) {
-    const like = {
-      id,
-      title,
-      publisher,
-      img,
-    };
-    this.likes.push(like);
+  addLike({ id, title, publisher, image_url }) {
+    this.likes.push({ id, title, publisher, image_url });
     this.saveToStorage();
-    return like;
   }
 
   removeLike(id) {
-    const index = this.likes.findIndex((el) => el.id === id);
-    this.likes.splice(index, 1);
+    this.likes.splice(
+      this.likes.findIndex((el) => el.id === id),
+      1
+    );
     this.saveToStorage();
   }
 
@@ -26,8 +21,7 @@ export default class Likes {
   }
 
   saveToStorage() {
-    const likes = JSON.stringify(this.likes);
-    localStorage.setItem('likes', likes);
+    localStorage.setItem('likes', JSON.stringify(this.likes));
   }
 
   readStorage() {

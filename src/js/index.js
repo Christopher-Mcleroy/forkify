@@ -31,7 +31,6 @@ async function controlSearch(page) {
     state.search = new Search(query);
     // 3 clear input from view
     searchView.clearInput();
-    // eslint-disable-next-line no-undef
     // 4. render loader
     renderLoader(elements.searchRes);
     // 5. get recipes
@@ -42,7 +41,6 @@ async function controlSearch(page) {
         removeLoader();
         // 7. display results
         searchView.renderRecipes(state.search.recipes, page);
-        // eslint-disable-next-line no-use-before-define
       })
       .catch((err) => {
         throw err;
@@ -103,15 +101,9 @@ const controlCart = () => {
 
 const controlLike = (state) => {
   if (!state.likes) state.likes = new Likes();
-  const id = state.recipe.id;
+  const { id } = state.recipe;
   if (state.likes.isLiked(id) === -1) {
-    // add like
-    state.likes.addLike(
-      state.recipe.id,
-      state.recipe.title,
-      state.recipe.publisher,
-      state.recipe.image_url
-    );
+    state.likes.addLike(state.recipe);
     // toggle button
     likesView.toggleLikeBtn();
     // add to ui
@@ -138,10 +130,6 @@ window.addEventListener('load', () => {
   state.likes.readStorage();
   // render likes
   state.likes.likes.forEach((like) => likesView.addLike(like));
-  // toggle like button
-  if (state.likes.isLiked(id) !== -1) {
-    likesView.toggleLikeBtn();
-  }
 });
 
 // event listener for  recipe
