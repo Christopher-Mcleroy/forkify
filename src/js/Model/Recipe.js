@@ -96,7 +96,6 @@ export default class Recipe {
         unit: '',
         ingredient: ingredientArr.slice(unitIndex + 2).join(' '),
       };
-      console.log(ingObj.ingredient);
     } else if (unitIndex === -1) {
       ingObj = {
         value: 1,
@@ -112,17 +111,12 @@ export default class Recipe {
     const { ingredients } = this;
     const newIngredientsArr = this.replaceUnit(ingredients);
     const newIngredients = newIngredientsArr.map((ing) => {
-      ing = ing.split(' ');
-      let unitIndex = -1;
-      this.shortIngredient.forEach((el, index) => {
-        if (ing.includes(el)) {
-          unitIndex = ing.indexOf(this.shortIngredient[index]);
-        }
+      ing = ing.replace(',', '').split(' ');
+      const unitIndex = ing.findIndex((el) => {
+        return this.shortIngredient.includes(el);
       });
-
       return this.formatIngredient(ing, unitIndex);
     });
-    console.log(newIngredients);
     this.ingredients = newIngredients;
   }
 }
