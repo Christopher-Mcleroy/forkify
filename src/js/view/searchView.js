@@ -7,11 +7,11 @@ export const clearInput = () => {
   elements.searchInput.value = '';
 };
 
-const clearSearchInput = () => {
+const clearSearchResults = () => {
   elements.searchResults.innerHTML = '';
 };
 
-const clearSearchResult = () => {
+const clearSearchButtons = () => {
   elements.resultPages.innerHTML = '';
 };
 
@@ -75,7 +75,8 @@ export const renderRecipes = (recipes, page = 1, results = 10) => {
   const start = (page - 1) * results;
   const end = start + results;
   const numPages = Math.ceil(recipes.length / results);
-  clearSearchResult();
+  clearSearchResults();
+  clearSearchButtons();
   recipes.slice(start, end).forEach(displayRecipe);
   elements.resultPages.insertAdjacentHTML(
     'beforeend',

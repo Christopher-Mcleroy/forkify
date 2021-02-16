@@ -180,11 +180,8 @@ elements.searchForm.addEventListener('submit', (e) => {
 
 // search page buttons
 elements.resultPages.addEventListener('click', (e) => {
-  // finds button
   const btn = e.target.closest('.btn-inline');
-  // pulls data from button
   const page = parseInt(btn.getAttribute('data-page'), 10);
-  // renders new recipes
   searchView.renderRecipes(state.search.recipes, page);
 });
 
