@@ -1,6 +1,6 @@
 import { elements } from './base';
 
-export const renderItem = (item) => {
+export const renderShoppingCartItem = (item) => {
   const html = `
         <li class="shopping__item" data-itemID="${item.id}">
             <div class="shopping__count">
@@ -15,7 +15,6 @@ export const renderItem = (item) => {
   elements.shoppingList.insertAdjacentHTML('beforeend', html);
 };
 
-export const removeItem = (id) => {
-  const item = document.querySelector(`[data-itemID="${id}"]`);
-  item.remove();
+export const removeShoppingCartItem = (id) => {
+  document.querySelector(`[data-itemID="${id}"]`).remove();
 };

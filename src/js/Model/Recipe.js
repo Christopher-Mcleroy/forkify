@@ -3,6 +3,27 @@ import axios from 'axios';
 export default class Recipe {
   constructor(id) {
     this.id = id;
+    this.longIngredient = [
+      'cups',
+      'cup',
+      'teaspoons',
+      'teaspoon',
+      'tablespoons',
+      'tablespoon',
+      'ounces',
+      'ounces',
+    ];
+
+    this.shortIngredient = [
+      'cup',
+      'cup',
+      'tsp',
+      'tsp',
+      'tbsp',
+      'tbsp',
+      'oz',
+      'oz',
+    ];
   }
 
   async getItemData() {
@@ -29,89 +50,79 @@ export default class Recipe {
 
   updateServings(type) {
     const newServings = type === 'dec' ? this.servings - 1 : this.servings + 1;
-
-    this.ingredients.map((ing) => {
-      return (ing.value *= newServings / this.servings);
+    this.ingredients.forEach((ing) => {
+      ing.value *= newServings / this.servings;
     });
-
     this.servings = newServings;
+  }
+
+  replaceUnit(ingredients) {
+    return ingredients.map((ingredient) => {
+      let newIngredient = ingredient;
+      this.longIngredient.forEach((el, index) => {
+        newIngredient = newIngredient
+          .toLowerCase()
+          .trim()
+          .replace(el, this.shortIngredient[index]);
+      });
+      newIngredient = newIngredient.replace(/ *\([^)]*\) */g, ' ');
+      return newIngredient;
+    });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  formatIngredient(ingredientArr, unitIndex) {
+    let ingObj = {};
+    if (unitIndex === 0) {
+      ingObj = {
+        value: 1,
+        unit: ingredientArr[unitIndex],
+        ingredient: ingredientArr.slice(unitIndex + 1).join(' '),
+      };
+    } else if (unitIndex > -1) {
+      ingObj = {
+        value: eval(
+          ingredientArr.slice(0, unitIndex).join('+').replace('-', '+')
+        ),
+        unit: ingredientArr[unitIndex],
+        ingredient: ingredientArr
+          .slice(unitIndex + 1)
+          .join(' ')
+          .replace('1', ''),
+      };
+    } else if (parseInt(ingredientArr[0], 10)) {
+      ingObj = {
+        value: parseInt(ingredientArr[0], 10),
+        unit: '',
+        ingredient: ingredientArr.slice(unitIndex + 2).join(' '),
+      };
+      console.log(ingObj.ingredient);
+    } else if (unitIndex === -1) {
+      ingObj = {
+        value: 1,
+        unit: '',
+        ingredient: ingredientArr.join(' ').replace('1', ''),
+      };
+    }
+    // return result
+    return ingObj;
   }
 
   parseIngredients() {
     const { ingredients } = this;
-    const longIngredient = [
-      'cups',
-      'cup',
-      'teaspoons',
-      'teaspoon',
-      'tablespoons',
-      'tablespoon',
-      'ounces',
-      'ounces',
-    ];
-    const shortIngredient = [
-      'cup',
-      'cup',
-      'tsp',
-      'tsp',
-      'tbsp',
-      'tbsp',
-      'oz',
-      'oz',
-    ];
-    // loop array
-
-    // loop long ingredients
-    const newIngredient = ingredients.map((element) => {
-      // lowercase ingredients
-      let ingredient = element.toLowerCase();
-      // loop long ingredients
-      longIngredient.forEach((el, ind) => {
-        // replace long ingredient found with short
-        ingredient = ingredient.replace(el, shortIngredient[ind]);
+    const newIngredientsArr = this.replaceUnit(ingredients);
+    const newIngredients = newIngredientsArr.map((ing) => {
+      ing = ing.split(' ');
+      let unitIndex = -1;
+      this.shortIngredient.forEach((el, index) => {
+        if (ing.includes(el)) {
+          unitIndex = ing.indexOf(this.shortIngredient[index]);
+        }
       });
-      // remove parentheses
-      ingredient = ingredient.replace(/ *\([^)]*\) */g, ' ');
-      // split into count unit and ingredient
-      const ingredientArr = ingredient.trim().split(' ');
-      // finds unit index
-      const unitIndex = ingredientArr.findIndex((el) =>
-        shortIngredient.includes(el)
-      );
-      // creates ingredient object
-      let ingObj = {};
-      // assigns values unit and ingredient to ingObj
-      if (unitIndex === 0) {
-        ingObj = {
-          value: 1,
-          unit: ingredientArr[unitIndex],
-          ingredient: ingredientArr.slice(unitIndex).join(' '),
-        };
-      } else if (unitIndex > -1) {
-        ingObj = {
-          value: eval(
-            ingredientArr.slice(0, unitIndex).join('+').replace('-', '+')
-          ),
-          unit: ingredientArr[unitIndex],
-          ingredient: ingredientArr.slice(unitIndex).join(' '),
-        };
-      } else if (parseInt(ingredientArr[0], 10)) {
-        ingObj = {
-          value: parseInt(ingredientArr[0], 10),
-          unit: '',
-          ingredient: ingredientArr.splice(1).join(' '),
-        };
-      } else if (unitIndex === -1) {
-        ingObj = {
-          value: 1,
-          unit: '',
-          ingredient,
-        };
-      }
-      // return result
-      return ingObj;
+
+      return this.formatIngredient(ing, unitIndex);
     });
-    // sets new ingredients
-    this.ingredients = newIngredient;
+    console.log(newIngredients);
+    this.ingredients = newIngredients;
   }
 }

@@ -92,7 +92,7 @@ const controlCart = () => {
   state.recipe.ingredients.forEach((el) =>
     state.list.addItem(el.value, el.unit, el.ingredient)
   );
-  state.list.items.forEach((el) => shoppingCartView.renderItem(el));
+  state.list.items.forEach((el) => shoppingCartView.renderShoppingCartItem(el));
 };
 
 // ************************************************************************************************** */
@@ -156,7 +156,7 @@ elements.shoppingList.addEventListener('click', (e) => {
     // get id
     const id = e.target.closest('.shopping__item').dataset.itemid;
     state.list.removeItem(id);
-    shoppingCartView.removeItem(id);
+    shoppingCartView.removeShoppingCartItem(id);
   }
 });
 
