@@ -12,11 +12,12 @@ export const toggleLikeBtn = () => {
 };
 
 export const addLike = (like) => {
+  console.log(like);
   const html = `
     <li class="likes__li" data-id="${like.id}">
     <a class="likes__link" href="#${like.id}">
         <figure class="likes__fig">
-            <img src="${like.img}" alt="Test">
+            <img src="${like.image_url}" alt="Test">
         </figure>
         <div class="likes__data">
             <h4 class="likes__name">${limitStringLength(like.title)}</h4>

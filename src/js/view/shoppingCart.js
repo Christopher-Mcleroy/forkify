@@ -4,7 +4,7 @@ export const renderShoppingCartItem = (item) => {
   const html = `
         <li class="shopping__item" data-itemID="${item.id}">
             <div class="shopping__count">
-                <input type="number" value="${item.value}" step=".25">
+                <input type="number" value="${item.value}" step=".25" min="0">
                 <p>${item.unit}</p>
             </div>
             <p class="shopping__description">${item.ingredient}</p>
