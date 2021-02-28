@@ -19,7 +19,7 @@ async function controlSearch(page) {
     searchView.clearInput();
     renderLoader(elements.searchRes);
     await state.search
-      .getData()
+      .searchByName()
       .then(() => {
         removeLoader();
         searchView.renderRecipes(state.search.recipes, page);
@@ -41,7 +41,6 @@ async function controlItem() {
     state.recipe.parseIngredients();
     removeLoader();
     state.recipe.calcRecipeTime();
-    state.recipe.calcServings();
     recipe.renderRecipe(state.recipe);
     if (state.likes) {
       if (state.likes.isLiked(state.recipe.id) !== -1) {

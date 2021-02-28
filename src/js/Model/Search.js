@@ -5,7 +5,7 @@ export default class Search {
     this.query = query;
   }
 
-  async getData() {
+  async searchByName() {
     try {
       const result = await axios(
         `https://forkify-api.herokuapp.com/api/search?&q=${this.query}`
@@ -14,5 +14,11 @@ export default class Search {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async searchById() {
+    return await axios(
+      `https://forkify-api.herokuapp.com/api/get?rId=${this.query}`
+    );
   }
 }

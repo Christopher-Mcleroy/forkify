@@ -1,51 +1,25 @@
-import axios from 'axios';
+import Search from './Search';
 
 export default class Recipe {
   constructor(id) {
     this.id = id;
-    this.longIngredient = [
-      'cups',
-      'cup',
-      'teaspoons',
-      'teaspoon',
-      'tablespoons',
-      'tablespoon',
-      'ounces',
-      'ounces',
-    ];
-
-    this.shortIngredient = [
-      'cup',
-      'cup',
-      'tsp',
-      'tsp',
-      'tbsp',
-      'tbsp',
-      'oz',
-      'oz',
-    ];
+    this.servings = 4;
   }
 
   async getItemData() {
-    const result = await axios(
-      `https://forkify-api.herokuapp.com/api/get?rId=${this.id}`
-    );
+    const result = await new Search(this.id).searchById();
     this.recipe = result.data.recipe;
-    this.image_url = result.data.recipe.image_url;
-    this.ingredients = result.data.recipe.ingredients;
-    this.publisher = result.data.recipe.publisher;
-    this.publisher_url = result.data.recipe.publisher_url;
-    this.source_url = result.data.recipe.source_url;
-    this.title = result.data.recipe.title;
+    this.image_url = this.recipe.image_url;
+    this.ingredients = this.recipe.ingredients;
+    this.publisher = this.recipe.publisher;
+    this.publisher_url = this.recipe.publisher_url;
+    this.source_url = this.recipe.source_url;
+    this.title = this.recipe.title;
   }
 
   calcRecipeTime() {
     const periods = this.ingredients.length / 3;
     this.prepTime = Math.ceil(parseInt(periods * 15, 10));
-  }
-
-  calcServings() {
-    this.servings = 4;
   }
 
   updateServings(type) {
@@ -120,3 +94,27 @@ export default class Recipe {
     this.ingredients = newIngredients;
   }
 }
+
+Recipe.prototype.longIngredient = [
+  'cups',
+  'cup',
+  'teaspoons',
+  'teaspoon',
+  'tablespoons',
+  'tablespoon',
+  'ounces',
+  'ounces',
+];
+
+Recipe.prototype.shortIngredient = [
+  'cup',
+  'cup',
+  'tsp',
+  'tsp',
+  'tbsp',
+  'tbsp',
+  'oz',
+  'oz',
+];
+
+//module.exports = Recipe;
