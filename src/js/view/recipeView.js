@@ -27,7 +27,6 @@ export const updateIngredients = (recipe) => {
 };
 
 export const renderRecipe = (recipe) => {
-  console.log(recipe);
   elements.recipe.innerHTML = '';
   const html = `
 <figure class="recipe__fig">

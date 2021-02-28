@@ -12,7 +12,6 @@ export const toggleLikeBtn = () => {
 };
 
 export const addLike = (like) => {
-  console.log(like);
   const html = `
     <li class="likes__li" data-id="${like.id}">
     <a class="likes__link" href="#${like.id}">

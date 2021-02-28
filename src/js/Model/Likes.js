@@ -29,3 +29,5 @@ export default class Likes {
     if (storage) this.likes = storage;
   }
 }
+
+//module.exports = Likes;
