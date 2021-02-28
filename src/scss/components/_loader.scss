@@ -1,11 +1,12 @@
 .loader {
   margin: 5rem auto;
   text-align: center;
-}
-.loader i {
-  font-size: 7rem;
-  color: #f59a83;
-  animation: rotate 1.5s infinite linear;
+
+  i {
+    font-size: 7rem;
+    color: #f59a83;
+    animation: rotate 1.5s infinite linear;
+  }
 }
 
 @keyframes rotate {
