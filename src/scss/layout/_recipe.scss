@@ -86,7 +86,7 @@
     }
   }
 
-  &hover &__info-buttons {
+  &:hover &__info-buttons {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
